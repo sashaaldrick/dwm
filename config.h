@@ -5,7 +5,7 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static unsigned int borderpx  = 3;        /* border pixel of windows */
+static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -15,14 +15,19 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static char *fonts[]          = { "JetBrains Mono Nerd Font:size=14", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  };
+static char *fonts[]          = { "Hack:size=14:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  };
+/* static char *fonts[]          = { "JetBrains Mono Nerd Font:size=14", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; */
 static const char dmenufont[]       = "JetBrains Mono Nerd Font:size=14";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
 static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#770000";
-static char selbgcolor[]            = "#005577";
+/* static char selbordercolor[]        = "#770000"; */
+static char selbordercolor[]        = "#FFFFFF";
+/* static char selbgcolor[]            = "#005577"; */
+static char selbgcolor[]            = "#7B7B7B";
+
+
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -192,8 +197,8 @@ static Key keys[] = {
 	/* { MODKEY,			XK_d,		spawn,		SHCMD("") } }, */
 	{ MODKEY,			XK_f,		togglefullscr,	{0} },
 	{ MODKEY|ShiftMask,		XK_f,		setlayout,	{.v = &layouts[8]} },
-	{ MODKEY,			XK_g,		shiftview,	{ .i = -1 } },
-	{ MODKEY|ShiftMask,		XK_g,		shifttag,	{ .i = -1 } },
+	{ MODKEY,			XK_g,		focusmon,	{.i = -1 } },
+	{ MODKEY|ShiftMask,		XK_g,		tagmon,		{.i = -1 } },
 	{ MODKEY,			XK_h,		setmfact,	{.f = -0.05} },
 	/* J and K are automatically bound above in STACKEYS */
 	{ MODKEY,			XK_l,		setmfact,      	{.f = +0.05} },
