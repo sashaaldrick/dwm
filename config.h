@@ -216,7 +216,7 @@ static Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{ MODKEY,			XK_b,		togglebar,	{0} },
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_s,		spawn,		SHCMD(TERMINAL " -e nvim ~/dox/VimWiki/Scratch.md") },
+	{ MODKEY,			XK_s,		spawn,		SHCMD(TERMINAL " -e nvim ~/dox/VimWiki/scratch.md") },
 	{ MODKEY|ShiftMask,		XK_v,		spawn,		SHCMD(TERMINAL " -e nvim -c VimwikiIndex") },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat") },
 	{ MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
@@ -279,7 +279,7 @@ static Key keys[] = {
 	{ 0, XF86XK_ScreenSaver,	spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
 	{ 0, XF86XK_TaskPane,		spawn,		SHCMD(TERMINAL " -e htop") },
 	/* { 0, XF86XK_Battery,		spawn,		SHCMD("") }, */
-	{ 0, XF86XK_Launch1,		spawn,		SHCMD("xset dpms force off") },
+	{ 0, XF86XK_Launch1,		spawn,		SHCMD(TERMINAL " -e htop") },
 	{ 0, XF86XK_TouchpadToggle,	spawn,		SHCMD("(synclient | grep 'TouchpadOff.*1' && synclient TouchpadOff=0) || synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOff,	spawn,		SHCMD("synclient TouchpadOff=1") },
 	{ 0, XF86XK_TouchpadOn,		spawn,		SHCMD("synclient TouchpadOff=0") },
