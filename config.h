@@ -16,8 +16,9 @@ static int smartgaps          = 1;        /* 1 means no outer gap when there is 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 /* static char *fonts[]          = { "Hack:size=14:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; */
-static char *fonts[]          = { "JetBrains Mono Nerd Font:style=Bold:size=14:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; 
-static const char dmenufont[]       = "JetBrains Mono Nerd Font:size=14";
+/* static char *fonts[]          = { "JetBrains Mono Nerd Font:style=Bold:size=14:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; */
+static char *fonts[]          = { "FiraCode Nerd Font Mono:style=Light:pixelsize=20:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  };
+static const char dmenufont[]       = "FiraCode Nerd Font Mono:size=14";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -164,11 +165,12 @@ static Key keys[] = {
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ ControlMask|Mod4Mask, 	XK_q,		spawn, 		SHCMD("killall dwm") },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
+	{ MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("bwmenu --auto-lock -1 -C") },
 	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; rmdir ~/.abook") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ranger ~") },
-	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e khal interactive") }, /* default tiling */
+	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e vdirsyncer sync ; khal interactive") }, /* default tiling */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
@@ -255,8 +257,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F11,		spawn,		SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	{ MODKEY,			XK_F12,		spawn,		SHCMD("remaps & notify-send \\\"⌨️ Keyboard remapping...\\\" \\\"Re-running keyboard defaults for any newly plugged-in keyboards.\\\"") },
 	{ MODKEY,			XK_space,	zoom,		{0} },
-	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
-
+	{ MODKEY|ShiftMask,		XK_space,	spawn, 		SHCMD("menu-surfraw") },
 	{ 0,				XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ ShiftMask,			XK_Print,	spawn,		SHCMD("maimpick") },
 	{ MODKEY,			XK_Print,	spawn,		SHCMD("dmenurecord") },
@@ -267,13 +268,13 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioRaiseVolume,	spawn,		SHCMD("pamixer --allow-boost -i 3; kill -44 $(pidof dwmblocks)") },
 	{ 0, XF86XK_AudioLowerVolume,	spawn,		SHCMD("pamixer --allow-boost -d 3; kill -44 $(pidof dwmblocks)") },
-	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("mpc prev") },
-	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("mpc next") },
-	{ 0, XF86XK_AudioPause,		spawn,		SHCMD("mpc pause") },
-	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("mpc play") },
-	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("mpc stop") },
-	{ 0, XF86XK_AudioRewind,	spawn,		SHCMD("mpc seek -10") },
-	{ 0, XF86XK_AudioForward,	spawn,		SHCMD("mpc seek +10") },
+	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("playerctl --all-players previous") },
+	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("playerctl --all-players next") },
+	{ 0, XF86XK_AudioPause,		spawn,		SHCMD("playerctl --all-players play-pause") },
+	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("playerctl --all-players play-pause") },
+	{ 0, XF86XK_AudioStop,		spawn,		SHCMD("playerctl --all-players stop") },
+	{ 0, XF86XK_AudioRewind,	spawn,		SHCMD("playerctl --all-players prev") },
+	{ 0, XF86XK_AudioForward,	spawn,		SHCMD("playerctl --all-players next") },
 	{ 0, XF86XK_AudioMedia,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
 	{ 0, XF86XK_AudioMicMute,	spawn,		SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle") },
 	{ 0, XF86XK_PowerOff,		spawn,		SHCMD("sysact") },
