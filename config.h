@@ -17,7 +17,8 @@ static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 /* static char *fonts[]          = { "Hack:size=14:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; */
 /* static char *fonts[]          = { "JetBrains Mono Nerd Font:style=Bold:size=14:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; */
-static char *fonts[]          = { "FiraCode Nerd Font Mono:style=Light:pixelsize=20:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  };
+static char *fonts[]          = { "FiraCode Nerd Font Mono:style=Bold:pixelsize=20:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; 
+/* static char *fonts[]          = { "SF-Mono:style=Light:pixelsize=24:antialias=true:autohint=true", "JoyPixels:pixelsize=14:antialias=true:autohint=true"  }; */
 static const char dmenufont[]       = "FiraCode Nerd Font Mono:size=14";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
@@ -170,7 +171,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e neomutt ; rmdir ~/.abook") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e ranger ~") },
-	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e vdirsyncer sync ; khal interactive") }, /* default tiling */
+	{ MODKEY|ShiftMask,		XK_k,		spawn,		SHCMD(TERMINAL " -e khal interactive") }, /* default tiling */
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,			XK_y,		setlayout,	{.v = &layouts[2]} }, /* spiral */
@@ -215,7 +216,7 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
 	{ MODKEY|ShiftMask,		XK_z,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_x,		spawn,		SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv") },
+	{ MODKEY,			XK_x,		spawn,		SHCMD("multilockscreen -l dimblur --display 1 --span & xset dpms force off; mpc pause; pauseallmpv") },
 	{ MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("prompt 'Shutdown?' 'shutdown now'") },
 	{ MODKEY|ShiftMask,		XK_BackSpace,		spawn,		SHCMD("prompt 'Reboot?' 'reboot'") },
 	/* { MODKEY,			XK_c,		spawn,		SHCMD("") }, */
